@@ -3,32 +3,13 @@ apply plugin: 'eclipse'
 apply plugin: 'application'
 
 repositories {
-  mavenLocal()
-  maven {
-    url "https://artifactory.oneplatform.org/artifactory/libs-release"
-    credentials {
-      username = "oneplatform-deployment"
-      password = "AP6BLHRCfg5shfAo"
-//    url "${artifactory_contextUrl}/plugins-release"
-//    credentials {
-//      username = "${artifactoryUser}"
-//      password = "${artifactoryPassword}"
-    }
-  }
+  jcenter()
 }
 
 mainClassName = "org.oneplatform.tool.repository.RepositoryTool"
 
 dependencies {
-  compile 'com.atlassian.bitbucket.server:bitbucket-api:4.0.3'
-  compile ('org.oneplatform:oneplatform-commons-test:7.+') {
-    changing = true
-  }
-}
-
-configurations.all {
-  resolutionStrategy {
-    cacheDynamicVersionsFor 0, 'seconds'
-    cacheChangingModulesFor 0, 'seconds'
-  }
+  compile 'org.springframework:spring-web:4.1.6.RELEASE'
+  compile 'com.google.guava:guava:19.0'
+  compile 'com.fasterxml.jackson.core:jackson-databind:2.6.4'
 }
