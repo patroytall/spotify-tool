@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+repositories {
+  mavenLocal()
+  maven {
+    url "https://artifactory.oneplatform.org/artifactory/libs-release"
+    credentials {
+      username = "oneplatform-deployment"
+      password = "AP6BLHRCfg5shfAo"
+//    url "${artifactory_contextUrl}/plugins-release"
+//    credentials {
+//      username = "${artifactoryUser}"
+//      password = "${artifactoryPassword}"
+    }
+  }
+}
+
+mainClassName = "org.oneplatform.tool.repository.RepositoryTool"
+
+dependencies {
+  compile 'com.atlassian.bitbucket.server:bitbucket-api:4.0.3'
+  compile ('org.oneplatform:oneplatform-commons-test:7.+') {
+    changing = true
+  }
+}
+
+configurations.all {
+  resolutionStrategy {
+    cacheDynamicVersionsFor 0, 'seconds'
+    cacheChangingModulesFor 0, 'seconds'
+  }
+}
